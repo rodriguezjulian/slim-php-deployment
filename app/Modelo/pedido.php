@@ -10,6 +10,7 @@ enum EstadoPedido: string
 class Pedido
 {
     public $id;
+    public $codigo; //alfanumerico
     public $nombreCliente;
     public $totalPrecio;
     public $estado;
@@ -27,16 +28,17 @@ class Pedido
         }
     }
 
-    public function __construct6($nombreCliente, $totalPrecio, $estado = EstadoPedido::Preparacion, $tiempoEstimado, $numeroMesa) 
+    public function __construct6($id,$nombreCliente, $totalPrecio, $estado = EstadoPedido::Preparacion, $tiempoEstimado, $numeroMesa) 
     {
-        $this->id = self::GenerarId();
+        $this->id = $id;
+        $this->codigo = self::GenerarCodigo();
         $this->nombreCliente = $nombreCliente;
         $this->totalPrecio = $totalPrecio;
         $this->estado = $estado;
         $this->tiempoEstimado = $tiempoEstimado;
         $this->numeroMesa = $numeroMesa;
     }
-    public static function GenerarId()
+    public static function GenerarCodigo()
     {
         $id = "";
         $caracteres = "0123456789abcdefghijklmnopqrstuvwxyz";

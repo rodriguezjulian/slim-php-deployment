@@ -8,7 +8,7 @@ include ("./Controlador/productoControlador.php");
 include ("./Middlewares/autorizacionMiddleware.php");
 include ("./Middlewares/JsonMiddleware.php");
 include ("./Controlador/loginControlador.php");
-
+include ("./Controlador/productosSolicitadosControlador.php");
 // Error Handling
 error_reporting(-1);
 ini_set('display_errors', 1);
@@ -78,5 +78,12 @@ $app->get('[/]', function (Request $request, Response $response) {
     $response->getBody()->write($payload);
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->group('/productosolicitado', function (RouteCollectorProxy $group) {
+   $group->get('[/]', \ProductoSolicitadoControlador::class . ':ListarPorTipo');
+ // $group->get('/{id}', \ProductoControlador::class . ':ListarPorTipo');
+   $group->post('[/]', \ProductoSolicitadoControlador::class . ':Insertar');
+});
+
 $app->run();
 ?>

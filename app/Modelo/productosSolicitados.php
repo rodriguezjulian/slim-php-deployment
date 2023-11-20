@@ -1,19 +1,21 @@
 <?php
 enum EstadoProducto : string
 {
-    case Realizado="Realizado";
     case Pendiente="Pendiente";
     case EnPreparacion="En preparacion";
+    case Realizado="Realizado";
 }
 
 class ProductoPedido
 {
     public $id; 
     public $idProducto;
-    public $idPedido;
+    public $codigoPedido;
     public $tiempo;
     public $estado;
     public $unidades;
+    public $horaDeInicio;
+    public $horaDeFinalizacion;
 
     public function __construct()
     {
@@ -25,11 +27,12 @@ class ProductoPedido
             call_user_func_array(array($this,$funcion_constructor),$params);
         }
     }
-    public function __construct3($idProducto, $idPedido, $estado) 
+    public function __construct4($idProducto, $codigoPedido,$estado, $unidades) 
     {
         $this->idProducto = $idProducto;
-        $this->idPedido = $idPedido;
+        $this->codigoPedido = $codigoPedido;
         $this->estado = $estado;
+        $this->unidades = $unidades;
     }
 }
 ?>

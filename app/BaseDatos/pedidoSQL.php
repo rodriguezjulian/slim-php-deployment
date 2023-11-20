@@ -8,19 +8,17 @@ class PedidoSQL
         
         $estado=$pedido->estado->value;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta ("INSERT into pedido (id,nombreCliente,totalPrecio,estado,tiempoEstimado,numeroMesa)values(:id,:nombreCliente,:totalPrecio,:estado,:tiempoEstimado,:numeroMesa)");
-        $consulta->bindValue(':id', $pedido->id);
+        $consulta = $objetoAccesoDato->RetornarConsulta ("INSERT into pedido (codigo,nombreCliente,estado,numeroMesa)values(:codigo,:nombreCliente,:estado,:numeroMesa)");
+        $consulta->bindValue(':codigo', $pedido->codigo);
         $consulta->bindValue(':nombreCliente', $pedido->nombreCliente);
-        $consulta->bindValue(':totalPrecio', $pedido->totalPrecio);
         $consulta->bindValue(':estado', $estado);
-        $consulta->bindValue(':tiempoEstimado', $pedido->tiempoEstimado);
         $consulta->bindValue(':numeroMesa', $pedido->numeroMesa);
         $consulta->execute();
     }
     public static function ObtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, nombreCliente, totalPrecio, estado, tiempoEstimado, numeroMesa FROM pedido");
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, nombreCliente, estado, numeroMesa FROM pedido");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
@@ -29,7 +27,7 @@ class PedidoSQL
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
         //$consulta = $objAccesoDatos->RetornarConsulta("SELECT * FROM pedido WHERE id = :id");
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, nombreCliente, totalPrecio, estado, tiempoEstimado, numeroMesa FROM pedido WHERE id = :id");
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, nombreCliente, estado, numeroMesa FROM pedido WHERE id = :id");
         $consulta->bindValue(':id', $id);
         $consulta->execute();
         return $consulta->fetchObject('pedido');

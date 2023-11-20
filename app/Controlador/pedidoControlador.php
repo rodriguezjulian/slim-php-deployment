@@ -8,27 +8,20 @@ class PedidoControlador
     {
         //Obtengo los parametros que el servidor me envio
         $parametros = $request->getParsedBody();
-        if(isset($parametros['nombreCliente']) && isset($parametros['totalPrecio']) && isset($parametros['estado'])&& isset($parametros['numeroMesa']) && isset($parametros['productosSolicitados']))
+        if(isset($parametros['nombreCliente']) && isset($parametros['estado'])&& isset($parametros['numeroMesa']))
         {
-            // $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO empleado(`id`, `rol`, `nombre`, `diponible`, `estado`)
             $nombreCliente = $parametros['nombreCliente'];
-           // $idProductoPedido = $parametros['idProductoPedido'];
-            $totalPrecio = $parametros['totalPrecio'];
             $estado = $parametros['estado'];
-            //CALCULAR TIEMPO ESTIMADO
-            //$tiempoEstimado = $parametros['tiempoEstimado'];
             $numeroMesa = $parametros['numeroMesa'];
             //Creo el objeto
             $pedido = new Pedido();
-            $pedido->id = Pedido::GenerarId();
+            $codigoAlfanumerico=Pedido::GenerarCodigo();
+            $pedido->codigo = $codigoAlfanumerico;
             $pedido->nombreCliente = $nombreCliente;
-            $pedido->totalPrecio =$totalPrecio;
             $pedido->estado = EstadoPedido::from($estado);
-           // $pedido->tiempoEstimado =$tiempoEstimado;
             $pedido->numeroMesa =$numeroMesa;
             PedidoSQL::InsertarPedido($pedido);
-            PedidoControlador :: InsertarProductosSolicitados($pedido->id,$parametros['productosSolicitados']);
-            $payload = json_encode(array("mensaje" => "Pedido creado con exito"));
+            $payload = json_encode(array("mensaje" => "Pedido $codigoAlfanumerico creado con exito"));
         }
         else
         {
@@ -48,43 +41,6 @@ class PedidoControlador
             }
         }
     }
-    public function InsertarProductosSolicitadosSQL($id,$productoSolicitado)
-    {
-        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $estado="Pendiente";
-        $unidades= $productoSolicitado["unidades"];
-        $idProducto=$productoSolicitado["idProducto"];
-        $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO productossolicitados (idProducto,idPedido,estado,unidades) VALUES('$idProducto','$id','$estado','$unidades')");
-        $consulta->execute();
-        return $objetoAccesoDato->RetornarUltimoIdInsertado();
-
-    }
-    public function InsertarProductosSolicitados($id,$productosSolicitados)
-    {
-       // $productosSol= json_decode($productosSolicitados,true);
-        if(is_array($productosSolicitados))
-        {
-            foreach($productosSolicitados as $producto)
-            {   
-                PedidoControlador :: InsertarProductosSolicitadosSQL($id,$producto);
-            }
-        }      
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function ObtenerPedidoxId($request, $response, $args)
     {
