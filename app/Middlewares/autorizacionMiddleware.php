@@ -17,9 +17,8 @@ use Slim\Psr7\Response;
             $token = trim(explode("Bearer", $header)[1]);
             try
             {
-                AutentificadorJWT::VerificarToken($token);
-               // $parametros = $request->getQueryParams();
-                $data=AutentificadorJWT::ObtenerData($token);
+                AutentificadorJWT::VerificarToken($token); //VALIDEZ DEL TOKEN
+                $data=AutentificadorJWT::ObtenerData($token); //OBTENGO LA DATA
                 
                 if ($data->rol === "Socio" || $data->rol === $this->autorizado) 
                 {

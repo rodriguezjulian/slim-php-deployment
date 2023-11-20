@@ -6,7 +6,7 @@ enum EstadoProducto : string
     case Realizado="Realizado";
 }
 
-class ProductoPedido
+class ProductoSolicitado
 {
     public $id; 
     public $idProducto;

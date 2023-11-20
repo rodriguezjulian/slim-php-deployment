@@ -17,49 +17,39 @@ class ProductoSolicitadosSQL
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
         $consulta = $objAccesoDatos->RetornarConsulta("
-        SELECT ps.id, p.nombre AS nombreProducto, p.precio, ps.unidades, ps.tiempoEstimado
+        SELECT p.nombre AS nombreProducto, p.tipo, ps.id,ps.estado, ps.unidades
         FROM productossolicitados ps
         JOIN producto p ON ps.idProducto = p.id
         WHERE ps.estado = 'Pendiente'
-        AND p.tipo = :tipoEmpleado
-    ");
-    
-    $consulta->bindValue(':tipoEmpleado', $rol);
+        AND p.tipo = :tipoEmpleado");
 
+        $consulta->bindValue(':tipoEmpleado', $rol);
         $consulta->execute();
         $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($resultados as $resultado) {
-            $idSolicitud = $resultado['id'];
-            $nombreProducto = $resultado['nombreProducto'];
-            $precio = $resultado['precio'];
-            $unidades = $resultado['unidades'];
-            $tiempoEstimado = $resultado['tiempoEstimado'];
-            var_dump($resultado);
-        }
-        
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'ProductoPedido');
+
+        return $resultados;
     }
-    /*
-  $consulta = $objetoAccesoDato->RetornarConsulta("
-    SELECT ps.id AS idSolicitud, p.id AS idProducto, p.nombre AS nombreProducto, p.precio, ps.unidades, ps.tiempoEstimado
-    FROM productossolicitados ps
-    JOIN producto p ON ps.idProducto = p.id
-    WHERE ps.estado = 'Pendiente'
-        AND p.tipo = :tipoEmpleado
-    ");
+    public static function TraerProductos()
+    {
+       
+        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, idProducto, codigoPedido, estado, unidades FROM productossolicitados");
+        $consulta->execute();          
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'ProductoSolicitado');
+    }
 
-    $consulta->bindValue(':tipoEmpleado', $tipoEmpleado);
-    $consulta->execute();
-
-    $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
-    foreach ($resultados as $resultado) {
-        $idSolicitud = $resultado['idSolicitud'];
-        $idProducto = $resultado['idProducto'];
-        // Resto de los datos...
-}
-
-    
-    */
+    public static function CambiarEnProceso($id,$tiempoEstimado)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+        $consulta = $objetoAccesoDato->RetornarConsulta("UPDATE productossolicitados 
+        SET tiempoEstimado = :tiempoEstimado, estado = :estado, horaDeInicio = :horaDeInicio
+        WHERE id = :id");
+        $consulta->bindValue(':id', $id);
+        $consulta->bindValue(':tiempoEstimado', $tiempoEstimado);
+        $consulta->bindValue(':horaDeInicio',  date("Y-m-d H:i:s"));
+        $consulta->bindValue(':estado',  "EnProceso");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'ProductoSolicitado');
+    }
 }
 ?>

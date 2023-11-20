@@ -40,7 +40,7 @@ $app->group('/pedido', function (RouteCollectorProxy $group) {
     $group->get('[/]', \pedidoControlador::class . ':TraerTodos');  
     $group->get('/{id}', \pedidoControlador::class . ':ObtenerPedidoxId');
     $group->post('[/]', \pedidoControlador::class . ':Insertar');
-  });
+  })->add(new AutorizacionMiddleware("Mozo"));
 
   $app->group('/encuesta', function (RouteCollectorProxy $group) {
     $group->get('[/]', \EncuestaControlador::class . ':TraerEncuestas');
@@ -68,7 +68,7 @@ $app->group('/pedido', function (RouteCollectorProxy $group) {
     $group->get('/{id}', \ProductoControlador::class . ':ObtenerPedidoxId');
    $group->post('[/]', \ProductoControlador::class . ':Insertar');
  });
-//VerificarLogin
+
   $app->group('/login', function (RouteCollectorProxy $group) {
     $group->post('[/]', \LoginControlador::class . ':VerificarExistenciaUsuario');
  });
@@ -80,8 +80,8 @@ $app->get('[/]', function (Request $request, Response $response) {
 });
 
 $app->group('/productosolicitado', function (RouteCollectorProxy $group) {
+   $group->put('[/]', \ProductoSolicitadoControlador::class . ':CambiarEstado');
    $group->get('[/]', \ProductoSolicitadoControlador::class . ':ListarPorTipo');
- // $group->get('/{id}', \ProductoControlador::class . ':ListarPorTipo');
    $group->post('[/]', \ProductoSolicitadoControlador::class . ':Insertar');
 });
 
