@@ -16,7 +16,7 @@ class EmpleadoControlador implements InterfazGen
             $clave = $parametros['clave'];
             //Creo el objeto
             $empleado = new Empleado();
-            $empleado->rol = Rol::from($rol);
+            $empleado->rol;
             $empleado->nombre = $nombre;
             $empleado->activo =1;
             $empleado->clave =$clave;
@@ -63,7 +63,7 @@ class EmpleadoControlador implements InterfazGen
             $nombre = $parametros['nombre'];
             $estado = $parametros['estado'];
 
-            $empleado->rol = Rol::from($rol);
+            $empleado->rol = $rol;
             $empleado->nombre = $nombre;
             EmpleadoSQL::ModificarEmpleado($empleado);
             $payload = json_encode(array("Empleado modificado exitosamente."));

@@ -7,12 +7,12 @@ class EmpleadoSQL
             throw new InvalidArgumentException('El parámetro $empleado debe ser una instancia de la clase Empleado.');
         }
 
-        var_dump($empleado);
-        $rol = $empleado->rol->value;
+        //var_dump($empleado);
+        //$rol = $empleado->rol->value;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         try {
             $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO empleados( rol, nombre, activo, clave) VALUES ( :rol, :nombre, :activo, :clave);");
-            $consulta->bindValue(':rol', $rol);
+            $consulta->bindValue(':rol', $empleado->rol);
             $consulta->bindValue(':nombre', $empleado->nombre);
     
             // Manejo de booleanos para la columna activo

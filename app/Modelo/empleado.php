@@ -1,5 +1,5 @@
 <?php
-
+/*
 enum Rol : string
 {
     case Bartender = "Bartender" ;
@@ -7,7 +7,7 @@ enum Rol : string
     case Cocinero = "Cocinero" ;
     case Mozo = "Mozo";
     case Socio = "Socio";
-}
+}*/
 
 
 class Empleado

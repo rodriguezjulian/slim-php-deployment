@@ -9,6 +9,8 @@ include ("./Middlewares/autorizacionMiddleware.php");
 include ("./Middlewares/JsonMiddleware.php");
 include ("./Controlador/loginControlador.php");
 include ("./Controlador/productosSolicitadosControlador.php");
+include ("./Controlador/csvControlador.php");
+
 // Error Handling
 error_reporting(-1);
 ini_set('display_errors', 1);
@@ -83,6 +85,10 @@ $app->group('/productosolicitado', function (RouteCollectorProxy $group) {
    $group->put('[/]', \ProductoSolicitadoControlador::class . ':CambiarEstado');
    $group->get('[/]', \ProductoSolicitadoControlador::class . ':ListarPorTipo');
    $group->post('[/]', \ProductoSolicitadoControlador::class . ':Insertar');
+});
+
+$app->group('/csv', function (RouteCollectorProxy $group){
+  $group->post('[/]', \csvControlador::class . ':cargarCsv');
 });
 
 $app->run();
