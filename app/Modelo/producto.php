@@ -12,7 +12,8 @@ class Producto
     public $nombre;
     public $precio;
     public $tipo; 
-    public $tiempo;//minutos
+    public $tiempo;
+    public $activo;
 
     public function __construct()
     {
@@ -24,12 +25,13 @@ class Producto
             call_user_func_array(array($this,$funcion_constructor),$params);
         }
     }
-    public function __construct4($nombre, $precio, $tipo, $tiempo) 
+    public function __construct5($nombre, $precio, $tipo, $tiempo, $activo) 
     {
         $this->nombre = $nombre;
         $this->precio = $precio;
         $this->tipo = $tipo;
         $this->tiempo = $tiempo;
+        $this->activo = $activo;
     }
 }
 ?>

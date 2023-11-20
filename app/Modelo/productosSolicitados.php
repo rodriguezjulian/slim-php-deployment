@@ -1,9 +1,9 @@
 <?php
-enum EstadoProducto
+enum EstadoProducto : string
 {
-    case Realizado;
-    case Pendiente;
-    case EnProceso;
+    case Realizado="Realizado";
+    case Pendiente="Pendiente";
+    case EnPreparacion="En preparacion";
 }
 
 class ProductoPedido
@@ -11,7 +11,9 @@ class ProductoPedido
     public $id; 
     public $idProducto;
     public $idPedido;
+    public $tiempo;
     public $estado;
+    public $unidades;
 
     public function __construct()
     {

@@ -6,7 +6,8 @@ class ProductoSQL
     {
         $tipo=$producto->tipo->value;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,precio,tipo,tiempo) VALUES('$producto->nombre','$producto->precio','$tipo','$producto->tiempo')");
+        $activo = $producto->activo ? 1 : 0;
+        $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO producto (nombre,precio,tipo,tiempo,activo) VALUES('$producto->nombre','$producto->precio','$tipo','$producto->tiempo',$activo)");
         $consulta->execute();
         return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }

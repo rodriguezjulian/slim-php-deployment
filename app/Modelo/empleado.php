@@ -6,20 +6,17 @@ enum Rol : string
     case Cervecero = "Cervecero" ;
     case Cocinero = "Cocinero" ;
     case Mozo = "Mozo";
+    case Socio = "Socio";
 }
-enum EstadoEmpleado : string
-{
-    case Presente = "Presente";
-    case Ausente = "Ausente";
-}
+
 
 class Empleado
 {
     public $id;
     public $rol;
     public $nombre;
-    public $disponible; //disponible no disponible
-    public $estado; //presente ausente
+    public $activo;//si esta activo es porque continua trabajando 1 /0 
+    public $clave;
     public function __construct()
     {
         //obtengo un array con los parámetros enviados a la función
@@ -35,12 +32,12 @@ class Empleado
             call_user_func_array(array($this,$funcion_constructor),$params);
         }
     }
-    public function __construct4($rol, $nombre, $disponible, $estado) 
+    public function __construct4($rol, $nombre,$activo, $clave) 
     {
+        $this->activo = $activo;
         $this->rol = $rol;
         $this->nombre = $nombre;
-        $this->disponible = $disponible;
-        $this->estado = $estado;
+        $this->clave = $clave;
     }
 }
 ?>

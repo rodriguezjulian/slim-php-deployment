@@ -2,11 +2,11 @@
 
 enum EstadoPedido: string
 {
+    case Pendiente="Pendiente";
     case Preparacion="Preparacion";
     case Cancelado="Cancelado";
     case Entregado="Entregado";
 }
-
 class Pedido
 {
     public $id;

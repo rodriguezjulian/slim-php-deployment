@@ -5,6 +5,9 @@ include ("./Controlador/encuestaControlador.php");
 include ("./Controlador/mesaControlador.php");
 include ("./Controlador/pedidoControlador.php");
 include ("./Controlador/productoControlador.php");
+include ("./Middlewares/autorizacionMiddleware.php");
+include ("./Middlewares/JsonMiddleware.php");
+include ("./Controlador/loginControlador.php");
 
 // Error Handling
 error_reporting(-1);
@@ -28,8 +31,12 @@ $app->addErrorMiddleware(true, true, true);
 $app->addBodyParsingMiddleware();
 //corchetes quiere decir opcional
 // Routes
-$app->group('/pedido', function (RouteCollectorProxy $group) {
 
+
+//PARA EVITAR ESCRIBIR LA LINEA $app->add(new JsonMiddleware());
+$app->add(new JsonMiddleware());
+
+$app->group('/pedido', function (RouteCollectorProxy $group) {
     $group->get('[/]', \pedidoControlador::class . ':TraerTodos');  
     $group->get('/{id}', \pedidoControlador::class . ':ObtenerPedidoxId');
     $group->post('[/]', \pedidoControlador::class . ':Insertar');
@@ -40,20 +47,36 @@ $app->group('/pedido', function (RouteCollectorProxy $group) {
     $group->get('/{id}', \EncuestaControlador::class . ':ObtenerEncuestaxId');
     $group->post('[/]', \EncuestaControlador::class . ':Insertar');
   });
+
   $app->group('/empleado', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \EmpleadoControlador::class . ':TraerEmpleados');
+    $group->get('[/]', \EmpleadoControlador::class . ':ObtenerTodos');
     $group->get('/{id}', \EmpleadoControlador::class . ':ObtenerEmpleadoxId');
-    $group->post('[/]', \EmpleadoControlador::class . ':InsertarEmpleado');
-  });
+    $group->put('/{id}', \EmpleadoControlador::class . ':Modificar');
+    $group->put('/{id}/baja', \EmpleadoControlador::class . ':Borrar');
+    $group->post('[/]', \EmpleadoControlador::class . ':Insertar');
+  })->add(new AutorizacionMiddleware("Socio"));
+
+
   $app->group('/mesa', function (RouteCollectorProxy $group) {
      $group->get('[/]', \mesaControlador::class . ':TraerMesas');
     $group->get('/{id}', \mesaControlador::class . ':ObtenerMesaxId');
     $group->post('[/]', \mesaControlador::class . ':InsertarMesa');
-  });
+  })->add(new AutorizacionMiddleware("Mozo"));
+
   $app->group('/producto', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \ProductoControlador::class . ':TraerProductos');
-    $group->get('/{id}', \ProductoControlador::class . ':ObtenerProductoxId');
-   $group->post('[/]', \ProductoControlador::class . ':InsertarProducto');
+    $group->get('[/]', \ProductoControlador::class . ':TraerTodos');
+    $group->get('/{id}', \ProductoControlador::class . ':ObtenerPedidoxId');
+   $group->post('[/]', \ProductoControlador::class . ':Insertar');
  });
+//VerificarLogin
+  $app->group('/login', function (RouteCollectorProxy $group) {
+    $group->post('[/]', \LoginControlador::class . ':VerificarExistenciaUsuario');
+ });
+ 
+$app->get('[/]', function (Request $request, Response $response) {
+    $payload = json_encode(array("mensaje" => "Slim Framework 4 PHP"));
+    $response->getBody()->write($payload);
+    return $response->withHeader('Content-Type', 'application/json');
+});
 $app->run();
 ?>
