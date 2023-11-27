@@ -58,6 +58,16 @@
 				{
 					"name": "Listar pedidos",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -1036,6 +1046,170 @@
 										"slim-php-deployment",
 										"app",
 										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUNTO 3",
+					"item": []
+				},
+				{
+					"name": "PUNTO4",
+					"item": [
+						{
+							"name": "El cliente ve la demora del pedido",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/encuesta/MostrarDemora/numeroMesa/4/codigoPedido/focco",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"encuesta",
+										"MostrarDemora",
+										"numeroMesa",
+										"4",
+										"codigoPedido",
+										"focco"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUNTO5",
+					"item": [
+						{
+							"name": "Listar pedidos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/pedido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"pedido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "El socio ve la demora del pedido",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/encuesta/MostrarDemora/numeroMesa/4/codigoPedido/focco",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"encuesta",
+										"MostrarDemora",
+										"numeroMesa",
+										"4",
+										"codigoPedido",
+										"focco"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar productos solicitados en proceso por tipo",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nombreCliente",
+											"value": "Julian",
+											"type": "text"
+										},
+										{
+											"key": "estado",
+											"value": "Pendiente",
+											"type": "text"
+										},
+										{
+											"key": "numeroMesa",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado/MostrarPortipoEnProceso",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado",
+										"MostrarPortipoEnProceso"
 									]
 								}
 							},

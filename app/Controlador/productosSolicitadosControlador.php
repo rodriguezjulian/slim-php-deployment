@@ -1,6 +1,7 @@
 <?php
 include ("./Modelo/productosSolicitados.php");
 include ("./BaseDatos/productoSolicitadosSQL.php");
+//include_once("./BaseDatos/pedidoSQL.php");
 
 class ProductoSolicitadoControlador
 {
@@ -40,13 +41,25 @@ class ProductoSolicitadoControlador
              return $response
              ->withHeader('Content-Type', 'application/json');
         }
+        public function ListarPorTipoEnProceso($request, $response, $args)
+        {
+            $header = $request->getHeaderLine('Authorization');
+            $token = trim(explode("Bearer", $header)[1]);
+            AutentificadorJWT::VerificarToken($token);
+             $data=AutentificadorJWT::ObtenerData($token);
+             $rol=$data->rol;
+             $lista= productoSolicitadosSQL :: ObtenerProductosPorTipoEnProceso($rol);
+             $payload = json_encode(array("Lista productos en proceso para $rol:" =>$lista));
+             $response->getBody()->write($payload);
+             return $response
+             ->withHeader('Content-Type', 'application/json');
+        }
 
         public function CambiarEstado($request, $response, $args)
         {
             $parametros = $request->getParsedBody();
             if(isset($parametros['id']) && isset($parametros['tiempo']))
             {
-                
                 $header = $request->getHeaderLine('Authorization');
                 $token = trim(explode("Bearer", $header)[1]);
                 AutentificadorJWT::VerificarToken($token);
@@ -59,7 +72,6 @@ class ProductoSolicitadoControlador
                 $listaProductos = ProductoSQL::TraerProductos();
                 $listaProductosSolicitados=ProductoSolicitadosSQL::TraerProductos();
               
-
                 foreach($listaProductosSolicitados as $ProductoSolicitado)
                 {
                     if($ProductoSolicitado->id == $idProductoSolicitado)
@@ -91,11 +103,18 @@ class ProductoSolicitadoControlador
                         $payload = json_encode(array("El producto no esta asignado a su rol"));
                     }
                 }
+                $codigoPedido=ProductoSolicitadosSQL :: TraerPedido($idProductoSolicitado);
+                $tiempoEstimado=ProductoSolicitadosSQL :: VerificarEstadoPedido($codigoPedido);
+                if($tiempoEstimado!=null)
+                {
+                    ProductoSolicitadosSQL :: PasarEnProceso($codigoPedido,$tiempoEstimado);
+                }
             }
             $response->getBody()->write($payload);
             return $response
             ->withHeader('Content-Type', 'application/json');
         }
+        
     }
 
 ?>

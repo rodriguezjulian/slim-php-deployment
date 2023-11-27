@@ -58,7 +58,19 @@ class PedidoControlador
         $payload = json_encode(array("listapedidos" => $lista));
         $response->getBody()->write($payload);
         return $response;
-          //->withHeader('Content-Type', 'application/json');
+
     }
+    public function MostrarDemora($request, $response, $args)
+    {
+        //$parametros = $request->getParsedBody();
+        if(isset($args['numeroMesa']) && isset($args['codigoPedido']))
+        {
+            $tiempoEstimado=PedidoSQL :: ObtenerTiempoEstimadoPedido($args['codigoPedido']);
+            $payload=json_encode("Tiempo estimado para su pedido: " . $tiempoEstimado);
+        }else $payload = json_encode("ERROR, Ingrese todos los parametros.");
+        $response->getBody()->write($payload);
+        return $response;
+    }   
+
 }
 ?>

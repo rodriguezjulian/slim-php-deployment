@@ -1,5 +1,5 @@
 <?php
-include ("accesoDatos.php");
+include_once ("accesoDatos.php");
 
 class PedidoSQL
 {
@@ -17,12 +17,16 @@ class PedidoSQL
     }
     public static function ObtenerTodos()
     {
-        $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
-        $consulta = $objAccesoDatos->RetornarConsulta("SELECT id, nombreCliente, estado, numeroMesa FROM pedido");
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM pedido");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
+        $pedidos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        return $pedidos;
     }
+
     public static function ObtenerPedido($id)
     {
         $objAccesoDatos = AccesoDatos::dameUnObjetoAcceso();
@@ -32,6 +36,26 @@ class PedidoSQL
         $consulta->execute();
         return $consulta->fetchObject('pedido');
     }
+
+    public static function ObtenerTiempoEstimadoPedido($codigoPedido)
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
+    
+        $consulta = $objetoAccesoDato->RetornarConsulta("SELECT tiempoEstimado FROM pedido WHERE codigo = :codigoPedido");
+        $consulta->bindValue(':codigoPedido', $codigoPedido);
+        $consulta->execute();
+    
+        $tiempoEstimado = $consulta->fetch(PDO::FETCH_ASSOC);
+    
+        if ($tiempoEstimado) {
+            return $tiempoEstimado['tiempoEstimado'];
+        } else {
+            // Manejar el caso en el que no se encuentra el pedido o no tiene tiempoEstimado
+            return null;
+        }
+    }
+    
+    
 
 
         
