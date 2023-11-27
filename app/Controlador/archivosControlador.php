@@ -7,28 +7,37 @@ class archivosControlador
     {
         $flag=0;
         $archivo=fopen($ruta,"r");
-        while(($data=fgetcsv($archivo,1000,","))!=false)
+        if($archivo!=null)
         {
-            if($flag==1)
+            while(($data=fgetcsv($archivo,1000,","))!=false)
             {
-                $empleado = new Empleado();
-                $empleado->id = $data[0];
-                $empleado->rol = $data[1];
-                $empleado->nombre = $data[2];
-                $empleado->activo = $data[3];
-                $empleado->clave = $data[4];
-                //var_dump($empleado);
-                empleadoSQL :: InsertarEmpleado($empleado);
+                if($flag==1)
+                {
+                    $empleado = new Empleado();
+                    $empleado->id = $data[0];
+                    $empleado->rol = $data[1];
+                    $empleado->nombre = $data[2];
+                    $empleado->activo = $data[3];
+                    $empleado->clave = $data[4];
+                    //var_dump($empleado);
+                    empleadoSQL :: InsertarEmpleado($empleado);
+                }
+                $flag=1;
             }
-            $flag=1;
         }
+       
         fclose($archivo);
     }
+    public static function DescargarEmpleadosDesdeBD()
+    {
+        $listaEmpleados=EmpleadoSQL::ObtenerEmpleados();
+        $data="id,rol,nombre,activo,clave\n";
+        foreach($listaEmpleados as $empleado)
+        {
+            $data=$data.$empleado->id . "," .$empleado->rol .",".$empleado->nombre. "," .$empleado->activo."," .$empleado->clave ."\n";
+        }
+        return $data;
+    }
+
 }
-
-
-
-
-
-
 ?>

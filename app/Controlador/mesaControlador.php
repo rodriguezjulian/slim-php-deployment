@@ -5,11 +5,10 @@ class MesaControlador
 {
     public function InsertarMesa($request, $response, $args)
     { 
-        //Obtengo los parametros que el servidor me envio
+      
         $parametros = $request->getParsedBody();
         if(isset($parametros['idPedido']) && isset($parametros['idMozo']) && isset($parametros['estado']))
         {
-           // echo "llegue";
             $idPedido = $parametros['idPedido'];
             $idMozo = $parametros['idMozo'];
             $estado = $parametros['estado'];

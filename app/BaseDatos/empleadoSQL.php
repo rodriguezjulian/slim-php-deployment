@@ -6,21 +6,19 @@ class EmpleadoSQL
         if (!($empleado instanceof Empleado)) {
             throw new InvalidArgumentException('El parámetro $empleado debe ser una instancia de la clase Empleado.');
         }
-
         //var_dump($empleado);
-        //$rol = $empleado->rol->value;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
         try {
             $consulta = $objetoAccesoDato->RetornarConsulta("INSERT INTO empleados( rol, nombre, activo, clave) VALUES ( :rol, :nombre, :activo, :clave);");
             $consulta->bindValue(':rol', $empleado->rol);
             $consulta->bindValue(':nombre', $empleado->nombre);
-    
+           
             // Manejo de booleanos para la columna activo
             $activo = $empleado->activo ? 1 : 0;
             $consulta->bindValue(':activo', $activo);
             $claveHash = password_hash($empleado->clave, PASSWORD_DEFAULT);
             $consulta->bindValue(':clave', $claveHash);
-    
+            
             $consulta->execute();
             return $objetoAccesoDato->RetornarUltimoIdInsertado();
         } catch (PDOException $e) {

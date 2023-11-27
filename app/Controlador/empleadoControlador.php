@@ -16,12 +16,13 @@ class EmpleadoControlador implements InterfazGen
             $clave = $parametros['clave'];
             //Creo el objeto
             $empleado = new Empleado();
-            $empleado->rol;
+            $empleado->rol=$rol;
             $empleado->nombre = $nombre;
             $empleado->activo =1;
             $empleado->clave =$clave;
-            $idRetornado=EmpleadoSQL::InsertarEmpleado($empleado);
-            echo $idRetornado;
+            //$idRetornado=EmpleadoSQL::InsertarEmpleado($empleado);
+            EmpleadoSQL::InsertarEmpleado($empleado);
+            //echo $idRetornado;
             $payload = json_encode(array("mensaje" => "Empleado creado con exito"));
         }
         else

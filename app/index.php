@@ -89,6 +89,7 @@ $app->group('/productosolicitado', function (RouteCollectorProxy $group) {
 
 $app->group('/csv', function (RouteCollectorProxy $group){
   $group->post('[/]', \csvControlador::class . ':cargarCsv');
+  $group->post('/descargar', \csvControlador::class . ':descargarCsv');
 });
 
 $app->run();

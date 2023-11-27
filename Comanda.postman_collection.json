@@ -1,0 +1,1358 @@
+{
+	"info": {
+		"_postman_id": "b4b863fc-0976-4f85-a4ad-dbd93df1ec3b",
+		"name": "Comanda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28523340"
+	},
+	"item": [
+		{
+			"name": "PEDIDOS",
+			"item": [
+				{
+					"name": "Alta pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombreCliente",
+									"value": "Julian",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "Pendiente",
+									"type": "text"
+								},
+								{
+									"key": "numeroMesa",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/pedido/1s4lv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"pedido",
+								"1s4lv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUCTOS SOLICITADIOS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombreCliente\": \"EMILIANO\",\r\n  \"totalPrecio\": 1212,\r\n  \"estado\": \"Pendiente\",\r\n  \"numeroMesa\": 10,\r\n  \"productosSolicitados\":[{\r\n      \"idProducto\": 2,\r\n      \"unidades\":2\r\n  },\r\n  {\r\n      \"idProducto\":4,\r\n      \"unidades\":2\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/pedido",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EMPLEADOS",
+			"item": [
+				{
+					"name": "Alta empleado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "rol",
+									"value": "Bartender",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Baltazar Nuque",
+									"type": "text"
+								},
+								{
+									"key": "clave",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar empleados",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener empleado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar empleado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rol\": \"Bartender\",\r\n  \"nombre\": \"aa\",\r\n  \"estado\": \"Presente\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Baja empleado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado/49/baja",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado",
+								"49",
+								"baja"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alta empleado MD Rol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "activo",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "rol",
+									"value": "Cocinero",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Alfio",
+									"type": "text"
+								},
+								{
+									"key": "disponible",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "Ausente",
+									"type": "text"
+								},
+								{
+									"key": "clave",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/empleado?rol=Socio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"empleado"
+							],
+							"query": [
+								{
+									"key": "rol",
+									"value": "Socio"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ENCUESTAS",
+			"item": [
+				{
+					"name": "Alta encuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombreCliente",
+									"value": "tony",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "todo",
+									"type": "text"
+								},
+								{
+									"key": "puntuacionMesa",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "puntuacionMozo",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "puntuacionCocinero",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "puntuacionRestaurant",
+									"value": "8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/encuesta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"encuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar encuestas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/encuesta",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"encuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener encuesta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/encuesta/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"encuesta",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MESAS",
+			"item": [
+				{
+					"name": "Alta mesa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "idPedido",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "idMozo",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "estado",
+									"value": "Comiendo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/mesa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"mesa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar mesas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/mesa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"mesa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener mesa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/mesa/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"mesa",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUCTOS",
+			"item": [
+				{
+					"name": "Alta producto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nombre",
+									"value": "Daikiri",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "700",
+									"type": "text"
+								},
+								{
+									"key": "tipo",
+									"value": "Bartender",
+									"type": "text"
+								},
+								{
+									"key": "tiempo",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "activo",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/producto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"producto"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "churro",
+									"disabled": true
+								},
+								{
+									"key": "precio",
+									"value": "202",
+									"disabled": true
+								},
+								{
+									"key": "tipo",
+									"value": "Cervecero",
+									"disabled": true
+								},
+								{
+									"key": "tiempo",
+									"value": "50",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar productos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/producto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"producto"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener producto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/producto/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"producto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CORRECCION PASO A PASO",
+			"item": [
+				{
+					"name": "PUNTO 1",
+					"item": [
+						{
+							"name": "Alta pedido",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nombreCliente",
+											"value": "Julian",
+											"type": "text"
+										},
+										{
+											"key": "estado",
+											"value": "Pendiente",
+											"type": "text"
+										},
+										{
+											"key": "numeroMesa",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/pedido",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"pedido"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Milanesa de pollo",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "idProducto",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "codigoPedido",
+											"value": "focco",
+											"type": "text"
+										},
+										{
+											"key": "unidades",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Descargar empleados",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/csv/descargar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"csv",
+										"descargar"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUNTO 2",
+					"item": [
+						{
+							"name": "Hamburguesas en proceso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"2\",\r\n  \"tiempo\": 10\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar pedido por tipo",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nombreCliente",
+											"value": "Julian",
+											"type": "text"
+										},
+										{
+											"key": "estado",
+											"value": "Pendiente",
+											"type": "text"
+										},
+										{
+											"key": "numeroMesa",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Daikiris en proceso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"4\",\r\n  \"tiempo\": 10\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Milanesa a caballo en proceso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"1\",\r\n  \"tiempo\": 10\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cerveza en proceso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"3\",\r\n  \"tiempo\": 10\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/slim-php-deployment/app/productosolicitado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"slim-php-deployment",
+										"app",
+										"productosolicitado"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CSV",
+			"item": [
+				{
+					"name": "Cargar csv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "empleado",
+									"type": "file",
+									"src": "/C:/Users/Julian Rodriguez/Desktop/ACA/esteSi.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/slim-php-deployment/app/csv",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"slim-php-deployment",
+								"app",
+								"csv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OBTENER TOKEN SOCIO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "gonz",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "rol",
+							"value": "Socio",
+							"type": "text"
+						},
+						{
+							"key": "activo",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/slim-php-deployment/app/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"slim-php-deployment",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OBTENER TOKEN BARTENDER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Baltazar Nuque",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "rol",
+							"value": "Bartender",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/slim-php-deployment/app/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"slim-php-deployment",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OBTENER TOKEN COCINERO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Lucas Pes",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "rol",
+							"value": "Cocinero",
+							"type": "text"
+						},
+						{
+							"key": "activo",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/slim-php-deployment/app/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"slim-php-deployment",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OBTENER TOKEN CERVECERO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Juan Pos",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "rol",
+							"value": "Cervecero",
+							"type": "text"
+						},
+						{
+							"key": "activo",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/slim-php-deployment/app/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"slim-php-deployment",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OBTENER TOKEN MOZO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Carlos Nuñez",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "1234",
+							"type": "text"
+						},
+						{
+							"key": "rol",
+							"value": "Mozo",
+							"type": "text"
+						},
+						{
+							"key": "activo",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/slim-php-deployment/app/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"slim-php-deployment",
+						"app",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

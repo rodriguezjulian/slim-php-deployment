@@ -79,16 +79,18 @@ class ProductoSolicitadoControlador
                 if($tipoProducto==$rol && $estadoActualProductoSolicitado=="Pendiente")
                 {
                     ProductoSolicitadosSQL :: CambiarEnProceso($idProductoSolicitado,$tiempo);
+                    $payload = json_encode(array("Producto solicitado en proceso"));
                 }
                 else
                 {
-                    if($tipoProducto==$rol && $estadoActualProductoSolicitado=="En preparacion")
+                    if($tipoProducto==$rol && $estadoActualProductoSolicitado=="EnProceso")
                     {
-
+                        $payload = json_encode(array("El producto ya se encuentra en proceso"));
+                    }else
+                    {
+                        $payload = json_encode(array("El producto no esta asignado a su rol"));
                     }
                 }
-
-                $payload = json_encode(array("Producto solicitado en proceso"));
             }
             $response->getBody()->write($payload);
             return $response

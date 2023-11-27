@@ -19,11 +19,21 @@ class csvControlador
           ->withHeader('Content-Type', 'application/json');
 
     }
-    public static function descargarCsv()
+    public static function descargarCsv($request, $response, $args)
     {
-
+        $data=archivosControlador :: DescargarEmpleadosDesdeBD();
+        if($data!=null)
+        {
+            $response = $response
+            ->withHeader('Content-Type', 'application/octet-stream')
+            ->withHeader('Content-Disposition', 'attachment;filename=empleados.csv')
+            ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->withHeader('Cache-Control', 'post-check=0, pre-check=0')
+            ->withHeader('Pragma', 'no-cache');
+        }
+        $response->getBody()->write($data);
+        return $response
+        ->withHeader('Content-Type', 'application/json');
     }
-
-
 }
 ?>
